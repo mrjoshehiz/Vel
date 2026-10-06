@@ -1,0 +1,5 @@
+'use client';
+import {useState} from 'react';
+import {Heart} from 'lucide-react';
+import type {Product} from '@/lib/products';
+export function SavePiece({product,initialSaved=false,onRemoved}:{product:Product;initialSaved?:boolean;onRemoved?:()=>void}){const [saved,setSaved]=useState(initialSaved),[busy,setBusy]=useState(false),[error,setError]=useState('');async function save(){setBusy(true);setError('');try{const r=await fetch('/api/store/saved',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:product.id,remove:saved})});if(r.status===401){window.location.assign('/saved');return}if(!r.ok)throw Error('Could not save. Please try again.');setSaved(!saved);if(saved)onRemoved?.()}catch(e){setError((e as Error).message)}finally{setBusy(false)}}return <div className="save-control"><button className="icon-button save-piece" onClick={save} disabled={busy} aria-label={`${saved?'Remove saved':'Save'} ${product.name}`} aria-pressed={saved}><Heart size={19} strokeWidth={1.6} fill={saved?'currentColor':'none'}/></button>{error&&<p className="save-error" role="alert">{error}</p>}</div>}

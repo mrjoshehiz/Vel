@@ -1,0 +1,3 @@
+import Link from 'next/link';
+import {stories} from '@/lib/journal';import {notFound} from 'next/navigation';
+export default async function Page({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const s=stories.find(s=>s.slug===slug);if(!s)notFound();return <main className="page article-page"><Link className="text-link" href="/journal">Back to the journal</Link><header><h1>{s.title}</h1><p>{s.intro}</p></header><img className="article-image" src={s.image} alt="Velmora collection photography"/><div className="article-body">{s.paragraphs.map(p=><p key={p}>{p}</p>)}<Link className="button" href="/shop">Explore the collection</Link></div></main>}

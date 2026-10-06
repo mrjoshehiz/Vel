@@ -1,0 +1,2 @@
+import {stories} from '@/lib/journal';
+export default function Page(){return <main className="page journal-page"><div className="page-heading"><h1>The journal.</h1><p>Notes on colour, shape and personal style.</p></div><div className="journal-grid">{stories.map((s,i)=><a href={`/journal/${s.slug}`} className={i===0?'journal-feature':''} key={s.slug}><img src={s.image} alt="" loading="lazy"/><div><h2>{s.title}</h2><p>{s.intro}</p><span className="text-link">Read the story</span></div></a>)}</div></main>}

@@ -1,0 +1,2 @@
+import {Admin} from '@/components/store/admin';import {collection} from '@/lib/products';
+export default function Page(){return <Admin demo products={collection} orders={[{id:'VM-SAMPLE',name:'Sample customer',email:'customer@example.com',total:91500,status:'Requested',created_at:1780272000000}]} reviews={[{id:'sample',name:'Sample review',rating:5,body:'An example review for demonstrating approval controls.',status:'Pending'}]}/>}

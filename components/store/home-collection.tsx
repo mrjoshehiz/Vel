@@ -1,0 +1,5 @@
+ 'use client';
+import {useState} from 'react';
+import type {Product} from '@/lib/products';
+import {Piece} from './piece';
+export function HomeCollection({products}:{products:Product[]}){const [category,setCategory]=useState('All pieces');const visible=products.filter(p=>category==='All pieces'||p.category===category);return <section className="home-collection section-wrap" data-editorial-reveal><div className="section-heading centered"><span className="eyebrow">THE CURRENT EDIT</span><h2>Meet your next favourite.</h2><p>Thoughtful silhouettes. Colours with character.</p></div><div className="category-tabs" aria-label="Filter collection">{['All pieces','Dresses','Sets','Tops'].map(c=><button key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div><div className="product-grid">{visible.map(p=><Piece key={p.id} product={p}/>)}</div>{!visible.length&&<p className="empty">New pieces are on their way. Explore another category.</p>}<div className="section-action"><a className="button outline" href="/shop">Explore the collection</a></div></section>}
